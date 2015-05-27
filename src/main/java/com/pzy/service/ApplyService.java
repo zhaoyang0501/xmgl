@@ -17,28 +17,47 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pzy.entity.Apply;
+import com.pzy.entity.Project;
+import com.pzy.entity.User;
 import com.pzy.repository.ApplyRepository;
 
 @Service
 public class ApplyService {
      @Autowired
      private ApplyRepository applyRepository;
-     public Page<Apply> findAll(final int pageNumber, final int pageSize,final String name){
-               PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
-              
-               Specification<Apply> spec = new Specification<Apply>() {
-                    @Override
-                    public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                    Predicate predicate = cb.conjunction();
-                    if (name != null) {
-                         predicate.getExpressions().add(cb.like(root.get("name").as(String.class), name+"%"));
-                    }
-                    return predicate;
-                    }
-               };
-               Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
-               return result;
+     public Page<Apply> findAll(final int pageNumber, final int pageSize,final Project project){
+           PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+           Specification<Apply> spec = new Specification<Apply>() {
+                @Override
+                public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Predicate predicate = cb.conjunction();
+                if (project != null) {
+                     predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
+                }
+                return predicate;
+                }
+           };
+           Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
+           return result;
      }
+     public Page<Apply> findAll(final int pageNumber, final int pageSize,final Project project,final User user){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Specification<Apply> spec = new Specification<Apply>() {
+              @Override
+              public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (project != null) {
+                   predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
+              }
+              if (user != null) {
+                  predicate.getExpressions().add(cb.equal(root.get("user").as(User.class),user));
+             }
+              return predicate;
+             }
+         };
+         Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
+         return result;
+   }
      public List<Apply> findAll(){
     	 return (List<Apply>) this.applyRepository.findAll();
      }

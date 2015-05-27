@@ -64,13 +64,19 @@
 							</div>
 							
 							<div class="container">
-								<form class="form-horizontal">
+							<c:if test="${tip!=null }">
+								<div class="alert alert-info">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<i class="icon-info-sign"></i>${tip }
+							</div>
+							</c:if>
+								<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/apply/doApply">
 								  <div class="control-group">
 								<label for="name" class="control-label">可申报的项目：</label>
 								<div class="controls">
 									<select name='apply.project.id'>
 										<c:forEach items="${projects}" var="bean">
-										<option ${bean.id }>${bean.name }</option>
+										<option value="${bean.id }">${bean.name }</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -83,7 +89,7 @@
 							</div>
 								  <div class="control-group">
 								    <div class="controls">
-								      <button type="button" class="btn" onclick="cleanBadRecord()">提交申请</button>
+								      <button type="submit" class="btn">提交申请</button>
 								    </div>
 								  </div>
 								</form>

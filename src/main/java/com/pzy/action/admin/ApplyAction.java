@@ -39,13 +39,21 @@ public class ApplyAction extends PageAction {
 		apply.setUser(user);
 		try {
 			applyService.save(apply);
+			this.setTip("申请成功，请等待管理员审批");
 		} catch (Exception e) {
 			this.setTip("已经申请过，请不要重复申请");
 		}
-		this.setTip("申请成功，请等待管理员审批");
+		
+		projects=this.projectService.findAll();
 		return SUCCESS;
 	}
 	
+	public Apply getApply() {
+		return apply;
+	}
+	public void setApply(Apply apply) {
+		this.apply = apply;
+	}
 	public List<Project> getProjects() {
 		return projects;
 	}

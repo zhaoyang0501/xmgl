@@ -26,12 +26,12 @@
 			<div class="tab-pane active dailyreport" id="dailyreport">
 				<ul id="nav" class="accordion-nav" >
 					<li><a href="${pageContext.request.contextPath}/admin/projectadd/index"><i class="icon-pencil"></i> 项目发布</a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-upload"></i> 项目审核 </a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/approve/index"><i class="icon-upload"></i> 项目审核 </a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/log/index"><i class="icon-zoom-out"></i>项目查询</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/resource/index"><i class="icon-zoom-in"></i> 项目验收</a></li>
 					
 					<li><a href="${pageContext.request.contextPath}/admin/apply/index"><i class="icon-pencil"></i> 项目申请</a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-upload"></i> 项目查询 </a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/approved/index"><i class="icon-upload"></i> 项目查询 </a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/log/index"><i class="icon-zoom-out"></i>项目验收</a></li>
 					
 					

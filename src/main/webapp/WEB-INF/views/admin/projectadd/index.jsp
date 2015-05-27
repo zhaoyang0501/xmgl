@@ -67,11 +67,11 @@
 							<c:if test="${tip!=null }">
 								<div class="alert alert-info">
 										<button type="button" class="close" data-dismiss="alert">&times;</button>
-										<i class="icon-info-sign"></i>发布成功！
+										<i class="icon-info-sign"></i>${tip }
 							</div>
 							</c:if>
 						
-								<form enctype="multipart/form-data" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/projectAdd/doUpload">
+								<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/projectAdd/doApply">
 								  <div class="control-group">
 								<label for="name" class="control-label">项目编号：</label>
 								<div class="controls">
