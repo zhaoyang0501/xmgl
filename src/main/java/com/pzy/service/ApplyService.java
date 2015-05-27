@@ -16,19 +16,19 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.pzy.entity.Project;
-import com.pzy.repository.ProjectRepository;
+import com.pzy.entity.Apply;
+import com.pzy.repository.ApplyRepository;
 
 @Service
-public class ProjectService {
+public class ApplyService {
      @Autowired
-     private ProjectRepository projectRepository;
-     public Page<Project> findAll(final int pageNumber, final int pageSize,final String name){
+     private ApplyRepository applyRepository;
+     public Page<Apply> findAll(final int pageNumber, final int pageSize,final String name){
                PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
               
-               Specification<Project> spec = new Specification<Project>() {
+               Specification<Apply> spec = new Specification<Apply>() {
                     @Override
-                    public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                    public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                     Predicate predicate = cb.conjunction();
                     if (name != null) {
                          predicate.getExpressions().add(cb.like(root.get("name").as(String.class), name+"%"));
@@ -36,19 +36,19 @@ public class ProjectService {
                     return predicate;
                     }
                };
-               Page<Project> result = (Page<Project>) projectRepository.findAll(spec, pageRequest);
+               Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
                return result;
      }
-     public List<Project> findAll(){
-    	 return (List<Project>) this.projectRepository.findAll();
+     public List<Apply> findAll(){
+    	 return (List<Apply>) this.applyRepository.findAll();
      }
      public void delete(Long id){
-    	 projectRepository.delete(id);
+    	 applyRepository.delete(id);
      }
-     public Project find(Long id){
-    	  return projectRepository.findOne(id);
+     public Apply find(Long id){
+    	  return applyRepository.findOne(id);
      }
-     public void save(Project project){
-    	 projectRepository.save(project);
+     public void save(Apply apply){
+    	 applyRepository.save(apply);
      }
 }

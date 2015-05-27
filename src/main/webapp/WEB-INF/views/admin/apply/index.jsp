@@ -68,15 +68,17 @@
 								  <div class="control-group">
 								<label for="name" class="control-label">可申报的项目：</label>
 								<div class="controls">
-									<select >
-									<option>XXXX科研项目</option>
+									<select name='apply.project.id'>
+										<c:forEach items="${projects}" var="bean">
+										<option ${bean.id }>${bean.name }</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
 							<div class="control-group">
 								<label for="address" class="control-label">申请理由：</label>
 								<div class="controls">
-										<textarea rows="5" cols="" class='span12'></textarea>
+										<textarea name='apply.remark' rows="5" cols="" class='span12'></textarea>
 								</div>
 							</div>
 								  <div class="control-group">

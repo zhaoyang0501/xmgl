@@ -64,29 +64,36 @@
 							</div>
 							
 							<div class="container">
-								<form class="form-horizontal">
+							<c:if test="${tip!=null }">
+								<div class="alert alert-info">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<i class="icon-info-sign"></i>发布成功！
+							</div>
+							</c:if>
+						
+								<form enctype="multipart/form-data" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/projectAdd/doUpload">
 								  <div class="control-group">
 								<label for="name" class="control-label">项目编号：</label>
 								<div class="controls">
-									<input type="text" name='carid' id="carid" placeholder=""  >
+									<input type="text" name='project.id'  placeholder=""  >
 								</div>
 							</div>
 							<div class="control-group">
 								<label for="address" class="control-label">项目名称：</label>
 								<div class="controls">
-										<input type="text" id="address" placeholder="" >
+										<input type="text" name='project.name' placeholder="" >
 								</div>
 							</div>
 							<div class="control-group">
 								<label for='type' class="control-label">项目描述：</label>
 								<div class="controls">
-									<input type="text"  id='type' placeholder="">
+									<input type="text" name='project.remark' id='type' placeholder="">
 								</div>
 							</div>
 							<div class="control-group" id='control_projectStep'>
 								<label for="createDate" class="control-label">项目文件：</label>
 								<div class="controls">
-										 <input id="createDate"  type="file"  >
+										 <input  name='filePath'  type="file"  >
 								</div>
 							</div>
 							<div class="control-group" id='control_projectStep'>
@@ -97,7 +104,7 @@
 							</div>
 								  <div class="control-group">
 								    <div class="controls">
-								      <button type="button" class="btn" onclick="cleanBadRecord()">发布</button>
+								      <button type="submit" class="btn" >发布</button>
 								    </div>
 								  </div>
 								</form>

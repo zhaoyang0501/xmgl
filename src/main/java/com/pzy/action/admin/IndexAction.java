@@ -1,18 +1,27 @@
 package com.pzy.action.admin;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.pzy.entity.User;
+import com.pzy.service.UserService;
 
 @Namespace("/admin")
-public class IndexAction  extends ActionSupport{
+public class IndexAction  extends ActionSupport implements SessionAware{
+	private Map<String,Object> session;
 	private String userName;
 	private String  password;
 	private String tip;
-    
+	private User user;
+	@Autowired
+    private UserService  userService;
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -33,15 +42,16 @@ public class IndexAction  extends ActionSupport{
      }
      @Action(value = "gologin", results = { @Result(name = "success", location = "/WEB-INF/views/admin/index.jsp"),@Result(name = "input", location = "/WEB-INF/views/admin/login.jsp") })
      public String gologin(){
-    	 if("admin".equals(this.userName)&&"123456".equals(this.password)){
-    		 ActionContext.getContext().getSession().put("adminuser", "admin");
-    		 return SUCCESS;
-    	 }
-    			
-    	 else{
-    		 tip="登录失败，用户名或者密码不正确";
-    		 return INPUT;
-    	 } 
+    	 User loginuser=userService.login(user.getId(), user.getPassword());
+	    	if(loginuser!=null){
+	    		session.put("user",loginuser );
+	            return SUCCESS; 
+	    	}
+	    	else{
+	    		ActionContext.getContext().getSession().clear();
+	    		this.tip="登陆失败 不存在此用户名或密码!";
+	    		return LOGIN;
+	    	}
          
      }
  	public String getTip() {
@@ -59,5 +69,15 @@ public class IndexAction  extends ActionSupport{
  	public String getPassword() {
  		return password;
  	}
+ 	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.session = arg0;
+	}
 }
 

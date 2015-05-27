@@ -8,7 +8,9 @@ import org.apache.struts2.json.annotations.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PageAction extends ActionSupport {
+	
 	private static final long serialVersionUID = -5836384121185061691L;
+	private String tip;
 	private Integer sEcho = 1;
 	private Integer iDisplayStart = 0;
 	private Integer iDisplayLength = 10;
@@ -45,5 +47,12 @@ public class PageAction extends ActionSupport {
 
 	public void setIDisplayLength(Integer iDisplayLength) {
 		this.iDisplayLength = iDisplayLength;
+	}
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 }
