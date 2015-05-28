@@ -66,8 +66,8 @@ jQuery.adminApprove = {
 						{
 							'aTargets' : [5],
 							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminApprove.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>通过</button>"+
-								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminApprove.deleteApprove("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 退回</button>";
+								return "<button class=\"btn2 btn-info\" onclick=\"$.adminApprove.pass("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>通过</button>"+
+								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminApprove.notpass("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 退回</button>";
 							}
 						},
 					 {
@@ -84,12 +84,12 @@ jQuery.adminApprove = {
 			}
 
 		},
-		deleteApprove :function(id){
-			bootbox.confirm( "是否确认删除？", function (result) {
+		pass :function(id){
+			bootbox.confirm( "是否确认审核通过？", function (result) {
 	            if(result){
 	            	$.ajax({
 	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/approve/delete?id="+id,
+	        			url : $.ace.getContextPath() + "/admin/approve/pass?id="+id,
 	        			dataType : "json",
 	        			success : function(json) {
 	        				if(json.resultMap.state=='success'){
@@ -103,71 +103,23 @@ jQuery.adminApprove = {
 	            }
 	        });
 		},
-		showaddModal: function(id){
-			$.adminApprove.toSave=true;
-			$("#user_modal_header_label").text("新增分类");
-			$("#_modal").modal('show');
+		notpass :function(id){
+			bootbox.confirm( "是否确认退回？", function (result) {
+	            if(result){
+	            	$.ajax({
+	        			type : "get",
+	        			url : $.ace.getContextPath() + "/admin/approve/notpass?id="+id,
+	        			dataType : "json",
+	        			success : function(json) {
+	        				if(json.resultMap.state=='success'){
+	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
+	        					$.adminApprove.initSearchDataTable();
+	        				}else{
+	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
+	        				}
+	        			}
+	        		});
+	            }
+	        });
 		},
-		save :function (){
-			if($.adminApprove.toSave){
-				$.ajax({
-	    			type : "post",
-	    			url : $.ace.getContextPath() + "/admin/approve/save",
-	    			data:{
-	    				"approve.title":$("#title").val(),
-	    				"approve.context":$("#context").val()
-	    			},
-	    			dataType : "json",
-	    			success : function(json) {
-	    				if(json.resultMap.state=='success'){
-	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	    					$.adminApprove.initSearchDataTable();
-	    					$("#_modal").modal('hide');
-	    				}else{
-	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
-	    				}
-	    			}
-	    		});
-			}else{
-				$.ajax({
-	    			type : "post",
-	    			url : $.ace.getContextPath() + "/admin/approve/update",
-	    			data:{
-	    				"approve.id":$("#id").val(),
-	    				"approve.title":$("#title").val(),
-	    				"approve.context":$("#context").val()
-	    			},
-	    			dataType : "json",
-	    			success : function(json) {
-	    				if(json.resultMap.state=='success'){
-	    					$("#user_edit_modal").modal('hide');
-	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"success","timeout":"2000"});
-	    					$.adminApprove.initSearchDataTable();
-	    					$("#_modal").modal('hide');
-	    				}else{
-	    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
-	    				}
-	    			}
-	    		});
-			}
-		},
-		showEdit: function (id){
-			$("#id").val(id);
-			$.adminApprove.toSave=false;
-			$.ajax({
-    			type : "get",
-    			url : $.ace.getContextPath() + "/admin/approve/get?id="+id,
-    			dataType : "json",
-    			success : function(json) {
-    				if(json.resultMap.state=='success'){
-    					$("#user_modal_header_label").text("修改分类");
-    					$("#_modal").modal('show');
-    					$("#title").val(json.resultMap.object.title);
-    					$("#context").val(json.resultMap.object.context);
-    				}else{
-    					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
-    				}
-    			}
-    		});
-		}
 };

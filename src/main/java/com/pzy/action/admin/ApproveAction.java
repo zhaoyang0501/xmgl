@@ -18,6 +18,7 @@ import com.pzy.service.ProjectService;
 @Namespace("/admin/approve")
 @ParentPackage("json-default") 
 public class ApproveAction extends PageAction {
+	private Long id;
 	private List<Project> projects;
 	@Autowired
 	private ProjectService projectService;
@@ -41,10 +42,33 @@ public class ApproveAction extends PageAction {
 		this.getResultMap().put("sEcho", getSEcho());
 		return SUCCESS;
 	}
+	@Action(value = "pass", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
+	public String pass() {
+		Apply apply = applyService.find(id);
+		apply.setState("申请通过");
+		applyService.save(apply);
+		getResultMap().put("state", "success");
+		getResultMap().put("msg", "审核通过成功");
+		return SUCCESS;
+	}
+	@Action(value = "notpass", results = { @Result(name = "success", type = "json",params={"ignoreHierarchy","false"}) })  
+	public String notpass() {
+		Apply apply = applyService.find(id);
+		apply.setState("申请退回");
+		applyService.save(apply);
+		getResultMap().put("state", "success");
+		getResultMap().put("msg", "审核通过成功");
+		return SUCCESS;
+	}
 	public List<Apply> getApplys() {
 		return applys;
 	}
-
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public void setApplys(List<Apply> applys) {
 		this.applys = applys;
 	}

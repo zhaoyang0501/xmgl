@@ -34,6 +34,7 @@ public class ApplyService {
                 if (project != null) {
                      predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
                 }
+               
                 return predicate;
                 }
            };
