@@ -37,7 +37,8 @@ public class ApplyService {
                 
                 Predicate p1=cb.equal(root.get("state").as(String.class), "已申请待审核"); 
                 Predicate p2=cb.equal(root.get("state").as(String.class), "申请退回"); 
-                Predicate p = cb.and(predicate,cb.or(p1,p2)); 
+                Predicate p3=cb.equal(root.get("state").as(String.class), "申请通过"); 
+                Predicate p = cb.and(predicate,cb.or(p1,p2,p3)); 
                 return p;
                 }
            };
