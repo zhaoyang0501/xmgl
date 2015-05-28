@@ -25,7 +25,7 @@ import com.pzy.repository.ApplyRepository;
 public class ApplyService {
      @Autowired
      private ApplyRepository applyRepository;
-     public Page<Apply> findAll(final int pageNumber, final int pageSize,final Project project){
+     public Page<Apply> findAllForApprove(final int pageNumber, final int pageSize,final Project project){
            PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
            Specification<Apply> spec = new Specification<Apply>() {
                 @Override
@@ -34,8 +34,11 @@ public class ApplyService {
                 if (project != null) {
                      predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
                 }
-               
-                return predicate;
+                
+                Predicate p1=cb.equal(root.get("state").as(String.class), "已申请待审核"); 
+                Predicate p2=cb.equal(root.get("state").as(String.class), "申请退回"); 
+                Predicate p = cb.and(predicate,cb.or(p1,p2)); 
+                return p;
                 }
            };
            Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);

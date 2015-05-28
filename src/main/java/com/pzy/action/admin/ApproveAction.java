@@ -35,7 +35,7 @@ public class ApproveAction extends PageAction {
 	public String list() {
 		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
 		int pageSize =  this.getIDisplayLength();
-		Page<Apply> list = applyService.findAll(pageNumber, pageSize,project);
+		Page<Apply> list = applyService.findAllForApprove(pageNumber, pageSize,project);
 		this.getResultMap().put("aaData", list.getContent());
 		this.getResultMap().put("iTotalRecords", list.getTotalElements());
 		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
