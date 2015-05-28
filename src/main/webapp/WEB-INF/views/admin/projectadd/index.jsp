@@ -13,7 +13,7 @@
 			type : "get",
 			url : $.ace.getContextPath() + "/admin/badrecord/get?id="+$("#badrecordid").val(),
 			dataType : "json",
-			success : function(json) {
+			success : function(json) { 
 				if(json.resultMap.state=='success'){
 					$("#carid").val(json.resultMap.object.car.id);
 					$("#address").val(json.resultMap.object.address);
@@ -71,7 +71,7 @@
 							</div>
 							</c:if>
 						
-								<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/projectAdd/doApply">
+								<form enctype="multipart/form-data"   class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/projectAdd/doUpload">
 								  <div class="control-group">
 								<label for="name" class="control-label">项目编号：</label>
 								<div class="controls">
@@ -87,13 +87,7 @@
 							<div class="control-group">
 								<label for='type' class="control-label">项目描述：</label>
 								<div class="controls">
-									<input type="text" name='project.remark' id='type' placeholder="">
-								</div>
-							</div>
-							<div class="control-group" id='control_projectStep'>
-								<label for="createDate" class="control-label">项目文件：</label>
-								<div class="controls">
-										 <input  name='filePath'  type="file"  >
+								<textarea name='project.remark' rows="5" cols="" class='span12'></textarea>
 								</div>
 							</div>
 							<div class="control-group" id='control_projectStep'>
@@ -102,6 +96,15 @@
 										 <input id="createDate"  type="text"  >
 								</div>
 							</div>
+							
+							
+							<div class="control-group" id='control_projectStep'>
+								<label for="createDate" class="control-label">项目文件：</label>
+								<div class="controls">
+										 <input  name='filePath'  type="file"  >
+								</div>
+							</div>
+							
 								  <div class="control-group">
 								    <div class="controls">
 								      <button type="submit" class="btn" >发布</button>

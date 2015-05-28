@@ -47,7 +47,15 @@
 										<c:forEach items="${projects}" var="bean">
 										<option value="${bean.id }">${bean.name }</option>
 										</c:forEach>
-									</select>
+								</select>
+								<span>项目状态：</span>
+								<select name='project.state' id='state'>
+										<option value="已申请待审核">已提交申请</option>
+										<option value="申请退回">申请退回</option>
+										<option value="已提交验收待审核">已提交验收</option>
+										<option value="验收通过">验收通过</option>
+										<option value="验收不通过">验收不通过</option>
+								</select>
 								<a onclick="$.adminApproved.initSearchDataTable()"
 									class="btn btn-info" data-loading-text="正在加载..."><i class="icon-search"></i>查询</a>
 							</div>
@@ -60,8 +68,9 @@
 											<th >项目</th>
 											<th >申请者</th>
 											<th >申请日期</th>
+											
+											<th >申请理由</th>
 											<th >状态</th>
-												<th >操作</th>
 										</tr>
 									</thead>
 									<tbody>

@@ -21,6 +21,7 @@ import com.pzy.service.ProjectService;
 @ParentPackage("json-default") 
 public class ApprovedAction extends PageAction {
 	private List<Project> projects;
+	private String state;
 	@Autowired
 	private ProjectService projectService;
 	private Project project;
@@ -37,7 +38,7 @@ public class ApprovedAction extends PageAction {
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
 		int pageNumber = (int) (this.getIDisplayStart() / this.getIDisplayLength()) + 1;
 		int pageSize =  this.getIDisplayLength();
-		Page<Apply> list = applyService.findAll(pageNumber, pageSize,project,user);
+		Page<Apply> list = applyService.findAll(pageNumber, pageSize,project,user,state);
 		this.getResultMap().put("aaData", list.getContent());
 		this.getResultMap().put("iTotalRecords", list.getTotalElements());
 		this.getResultMap().put("iTotalDisplayRecords", list.getTotalElements());
@@ -62,5 +63,11 @@ public class ApprovedAction extends PageAction {
 	}
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 }

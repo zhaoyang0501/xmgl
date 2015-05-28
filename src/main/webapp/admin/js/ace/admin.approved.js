@@ -33,10 +33,17 @@ jQuery.adminApproved = {
 					},
 					"fnServerData" : function(sSource, aoData, fnCallback) {
 						var project = $("#project").val();
+						var state = $("#state").val();
 						if (!!project) {
 							aoData.push({
 								"name" : "project.id",
 								"value" : project
+							});
+						}
+						if (!!state) {
+							aoData.push({
+								"name" : "state",
+								"value" : state
 							});
 						}
 						$.ajax({
@@ -58,17 +65,11 @@ jQuery.adminApproved = {
 					}, {
 						"mDataProp" : "createDate"
 					}, {
-						"mDataProp" : "state"
+						"mDataProp" : "remark"
 					}, {
-						"mDataProp" : ""
+						"mDataProp" : "state"
 					}],
 					"aoColumnDefs" : [
-						{
-							'aTargets' : [5],
-							'fnRender' : function(oObj, sVal) {
-								return "<button class=\"btn2 btn-info\" onclick=\"$.adminApproved.showEdit("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>删除</button>";
-							}
-						},
 					 {
 						'aTargets' : [ '_all' ],
 						'bSortable' : false,

@@ -60,7 +60,7 @@
 					<div class="span12">
 						<div class="content-widgets light-gray">
 							<div class="widget-head  bondi-blue" >
-								<h3>项目申请</h3>
+								<h3>项目验收</h3>
 							</div>
 							
 							<div class="container">
@@ -70,26 +70,32 @@
 										<i class="icon-info-sign"></i>${tip }
 							</div>
 							</c:if>
-								<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/apply/doApply">
+								<form  enctype="multipart/form-data"  class="form-horizontal" method="post" action="${pageContext.request.contextPath}/admin/gocheck/doCheck">
 								  <div class="control-group">
-								<label for="name" class="control-label">可申报的项目：</label>
+								<label for="name" class="control-label">待验收的项目：</label>
 								<div class="controls">
-									<select name='apply.project.id'>
-										<c:forEach items="${projects}" var="bean">
-										<option value="${bean.id }">${bean.name }</option>
+									<select name='apply.id'>
+										<c:forEach items="${applys}" var="bean">
+										  <option value="${bean.project.id }">${bean.project.name }</option>
 										</c:forEach>
 									</select>
 								</div>
 							</div>
-							<div class="control-group">
-								<label for="address" class="control-label">申请理由：</label>
+							<div class="control-group" id='control_projectStep'>
+								<label for="createDate" class="control-label">验收材料：</label>
 								<div class="controls">
-									 	<textarea name='apply.remark' rows="5" cols="" class='span12'></textarea>
+										 <input  name='filePath'  type="file"  >
+								</div>
+							</div>
+							<div class="control-group">
+								<label for="address" class="control-label">验收理由：</label>
+								<div class="controls">
+									 	<textarea name='apply.checkRemark' rows="5" cols="" class='span12'></textarea>
 								</div>
 							</div>
 								  <div class="control-group">
 								    <div class="controls">
-								      <button type="submit" class="btn">提交申请</button>
+								      <button type="submit" class="btn">提交验收</button>
 								    </div>
 								  </div>
 								</form>

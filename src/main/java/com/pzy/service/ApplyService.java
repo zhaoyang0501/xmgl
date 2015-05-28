@@ -58,8 +58,35 @@ public class ApplyService {
          Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
          return result;
    }
+     public Page<Apply> findAll(final int pageNumber, final int pageSize,final Project project,final User user,final String state){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Specification<Apply> spec = new Specification<Apply>() {
+              @Override
+              public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (project != null) {
+                   predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
+              }
+              if (user != null) {
+                  predicate.getExpressions().add(cb.equal(root.get("user").as(User.class),user));
+             }
+              if (state != null) {
+                  predicate.getExpressions().add(cb.equal(root.get("state").as(String.class),state));
+             }
+              return predicate;
+             }
+         };
+         Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
+         return result;
+   }
      public List<Apply> findAll(){
     	 return (List<Apply>) this.applyRepository.findAll();
+     }
+     public List<Apply> findAll(User user){
+    	 return (List<Apply>) this.applyRepository.findAll();
+     }
+     public List<Apply> findAllForCheck(User user,String state){
+    	 return (List<Apply>) this.applyRepository.findByUserAndState(user, state);
      }
      public void delete(Long id){
     	 applyRepository.delete(id);

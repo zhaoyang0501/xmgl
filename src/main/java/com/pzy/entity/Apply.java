@@ -22,7 +22,35 @@ public class Apply {
 	 /**申请理由*/
 	 private String remark;
 	 private Date createDate;
-	 public Long getId() {
+	 private String state;
+	 private  Date checkDate;
+	 private String checkRemark;
+	 private String checkFilePath;
+	 public String getCheckFilePath() {
+		return checkFilePath;
+	}
+	public void setCheckFilePath(String checkFilePath) {
+		this.checkFilePath = checkFilePath;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public Date getCheckDate() {
+		return checkDate;
+	}
+	public void setCheckDate(Date checkDate) {
+		this.checkDate = checkDate;
+	}
+	public String getCheckRemark() {
+		return checkRemark;
+	}
+	public void setCheckRemark(String checkRemark) {
+		this.checkRemark = checkRemark;
+	}
+	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

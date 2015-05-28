@@ -37,6 +37,7 @@ public class ApplyAction extends PageAction {
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
 		apply.setCreateDate(new Date());
 		apply.setUser(user);
+		apply.setState("已申请待审核");
 		try {
 			applyService.save(apply);
 			this.setTip("申请成功，请等待管理员审批");
