@@ -76,7 +76,7 @@
 								<div class="controls">
 									<select name='apply.id'>
 										<c:forEach items="${applys}" var="bean">
-										  <option value="${bean.project.id }">${bean.project.name }</option>
+										  <option value="${bean.id }">${bean.project.name }</option>
 										</c:forEach>
 									</select>
 								</div>

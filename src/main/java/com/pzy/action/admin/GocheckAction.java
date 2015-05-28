@@ -41,7 +41,7 @@ public class GocheckAction extends PageAction {
 	@Action(value = "index", results = { @Result(name = "success", location = "/WEB-INF/views/admin/gocheck/index.jsp") }) 
     public String index(){
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("user");
-		applys=applyService.findAllForCheck(user,"已申请待审核");
+		applys=applyService.findAllForCheck(user,"申请通过");
 		return SUCCESS;
     }
 	@Action(value = "doCheck", results = { @Result(name = "success", location = "/WEB-INF/views/admin/gocheck/index.jsp") }) 
@@ -50,7 +50,7 @@ public class GocheckAction extends PageAction {
 		newApply.setCheckDate(new Date());
 		newApply.setCheckRemark(apply.getCheckRemark());
 		newApply.setCheckFilePath(apply.getCheckFilePath());
-		newApply.setState("已提交验收待审核");
+		newApply.setState("已提交验收");
 		/**文件上传逻辑*/
 		String realpath = ServletActionContext.getServletContext().getRealPath("/upload");
 		System.out.println(realpath);

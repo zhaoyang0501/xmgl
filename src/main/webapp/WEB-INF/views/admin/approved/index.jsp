@@ -44,15 +44,18 @@
 							<div class="box well form-inline">
 								<span>项目：</span>
 								<select name='project.id' id='project'>
+								<option value=""></option>
 										<c:forEach items="${projects}" var="bean">
 										<option value="${bean.id }">${bean.name }</option>
 										</c:forEach>
 								</select>
 								<span>项目状态：</span>
 								<select name='project.state' id='state'>
+									<option value=""></option>
 										<option value="已申请待审核">已提交申请</option>
 										<option value="申请退回">申请退回</option>
-										<option value="已提交验收待审核">已提交验收</option>
+										<option value="申请通过">申请通过</option>
+										<option value="已提交验收">已提交验收</option>
 										<option value="验收通过">验收通过</option>
 										<option value="验收不通过">验收不通过</option>
 								</select>

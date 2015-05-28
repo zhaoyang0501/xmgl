@@ -44,6 +44,7 @@
 							<div class="box well form-inline">
 								<span>项目：</span>
 								<select name='project.id' id='project'>
+									<option value=""></option>
 										<c:forEach items="${projects}" var="bean">
 										<option value="${bean.id }">${bean.name }</option>
 										</c:forEach>
@@ -61,6 +62,8 @@
 											<th >申请者</th>
 											<th >申请日期</th>
 											<th >申请理由</th>
+											<th >状态</th>
+											<th >操作</th>
 										</tr>
 									</thead>
 									<tbody>

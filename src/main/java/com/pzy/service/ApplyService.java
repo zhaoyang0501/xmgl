@@ -45,6 +45,25 @@ public class ApplyService {
            Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
            return result;
      }
+     public Page<Apply> findAllForCheck(final int pageNumber, final int pageSize,final Project project){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Specification<Apply> spec = new Specification<Apply>() {
+              @Override
+              public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (project != null) {
+                   predicate.getExpressions().add(cb.equal(root.get("project").as(Project.class),project));
+              }
+              Predicate p1=cb.equal(root.get("state").as(String.class), "已提交验收"); 
+              Predicate p2=cb.equal(root.get("state").as(String.class), "验收通过"); 
+              Predicate p3=cb.equal(root.get("state").as(String.class), "验收不通过"); 
+              Predicate p = cb.and(predicate,cb.or(p1,p2,p3)); 
+              return p;
+              }
+         };
+         Page<Apply> result = (Page<Apply>) applyRepository.findAll(spec, pageRequest);
+         return result;
+   }
      public Page<Apply> findAll(final int pageNumber, final int pageSize,final Project project,final User user){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
          Specification<Apply> spec = new Specification<Apply>() {

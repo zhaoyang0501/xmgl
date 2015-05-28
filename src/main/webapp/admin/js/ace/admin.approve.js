@@ -60,11 +60,13 @@ jQuery.adminApprove = {
 					}, {
 						"mDataProp" : "remark"
 					}, {
+						"mDataProp" : "state"
+					}, {
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [5],
+							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {
 								return "<button class=\"btn2 btn-info\" onclick=\"$.adminApprove.pass("+oObj.aData.id+")\"><i class=\"icon-pencil\"></i>通过</button>"+
 								 "  <button class=\"btn2 btn-info\" onclick=\"$.adminApprove.notpass("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 退回</button>";

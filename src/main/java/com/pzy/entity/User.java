@@ -22,8 +22,8 @@ public class User implements Serializable {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
      private Long id;
-    
-     private String userName;
+     private String role;
+	private String userName;
      private String password;
      private String school;
      private String className;
@@ -72,5 +72,10 @@ public class User implements Serializable {
      public void setBirthDay(Date birthDay) {
           this.birthDay = birthDay;
      }
-
+     public String getRole() {
+ 		return role;
+ 	}
+ 	public void setRole(String role) {
+ 		this.role = role;
+ 	}
 }
