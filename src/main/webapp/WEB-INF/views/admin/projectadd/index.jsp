@@ -93,7 +93,7 @@
 							<div class="control-group" id='control_projectStep'>
 								<label for="createDate" class="control-label">上传人：</label>
 								<div class="controls">
-										 <input id="createDate"  type="text"  >
+										 <input name="project.creater"  type="text"  >
 								</div>
 							</div>
 							

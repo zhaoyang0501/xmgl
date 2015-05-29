@@ -112,6 +112,9 @@ public class ApplyService {
      public List<Apply> findAllForCheck(User user,String state){
     	 return (List<Apply>) this.applyRepository.findByUserAndState(user, state);
      }
+     public Integer countAll(Project project){
+    	 return this.applyRepository.countAll(project);
+     } 
      public void delete(Long id){
     	 applyRepository.delete(id);
      }

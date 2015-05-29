@@ -17,12 +17,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pzy.entity.Project;
+import com.pzy.repository.ApplyRepository;
 import com.pzy.repository.ProjectRepository;
 
 @Service
 public class ProjectService {
      @Autowired
      private ProjectRepository projectRepository;
+     @Autowired
+     private ApplyRepository applyRepository;
+     @Autowired
+     private ApplyService applyService;
      public Page<Project> findAll(final int pageNumber, final int pageSize,final String name){
                PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
               
@@ -37,7 +42,15 @@ public class ProjectService {
                     }
                };
                Page<Project> result = (Page<Project>) projectRepository.findAll(spec, pageRequest);
+               warpCount(result.getContent());
                return result;
+     }
+     private void warpCount(List<Project> projects){
+    	 for(Project bean:projects){
+    		 bean.setCount1(applyService.countAll(bean));
+    		 bean.setCount2(applyRepository.countApplyed(bean));
+    		 bean.setCount3(applyRepository.countCHecked(bean));
+    	 }
      }
      public List<Project> findAll(){
     	 return (List<Project>) this.projectRepository.findAll();

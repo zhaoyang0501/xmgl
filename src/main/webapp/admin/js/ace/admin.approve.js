@@ -65,6 +65,12 @@ jQuery.adminApprove = {
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
+					{
+						'aTargets' : [5],
+						'fnRender' : function(oObj, sVal) {
+							return "<span class=\"label label-success\">"+sVal+"</span>";
+						}
+					},
 						{
 							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {

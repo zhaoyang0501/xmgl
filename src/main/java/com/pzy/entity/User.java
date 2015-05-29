@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import org.apache.struts2.json.annotations.JSON;
 @Entity
-@Table(name = "ace_user")
+@Table(name = "t_user")
 public class User implements Serializable {
 
      /**

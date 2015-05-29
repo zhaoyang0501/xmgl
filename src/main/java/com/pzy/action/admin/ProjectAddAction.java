@@ -39,10 +39,12 @@ public class ProjectAddAction extends PageAction {
 		File savefile = new File(new File(realpath), this.filePathFileName);
          try {
 			FileUtils.copyFile(filePath, savefile);
+			project.setFilePath(filePathFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return ERROR;
 		}
+         projectService.save(project);
         this.setTip("上传成功");
 		return SUCCESS;
 	}

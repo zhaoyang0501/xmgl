@@ -61,20 +61,42 @@ jQuery.adminProject = {
 					}, {
 						"mDataProp" : "filePath"
 					}, {
-						"mDataProp" : "state"
+						"mDataProp" : "count1"
+					}, {
+						"mDataProp" : "count2"
+					}, {
+						"mDataProp" : "count3"
 					}],
 					"aoColumnDefs" : [
-					{
-						'aTargets' : [4],
-						'fnRender' : function(oObj, sVal) {
-							return "<a href=\"upload/"+sVal+"\" target=\"_blank\">下载立项资料</a>";
-						}
-					},
-					 {
-						'aTargets' : [ '_all' ],
-						'bSortable' : false,
-						'sClass' : 'center'
-					}]
+							{
+								'aTargets' : [5],
+								'fnRender' : function(oObj, sVal) {
+									return "<span class=\"badge badge-success\">"+sVal+"</span>";
+								}
+							},
+							{
+								'aTargets' : [6],
+								'fnRender' : function(oObj, sVal) {
+									return "<span class=\"badge badge-info\">"+sVal+"</span>";
+								}
+							},
+							{
+								'aTargets' : [7],
+								'fnRender' : function(oObj, sVal) {
+									return "<span class=\"badge badge-info\">"+sVal+"</span>";
+								}
+							},
+							{
+								'aTargets' : [4],
+								'fnRender' : function(oObj, sVal) {
+									return "<a href=\"upload/"+sVal+"\" target=\"_blank\">下载立项资料</a>";
+								}
+							},
+							 {
+								'aTargets' : [ '_all' ],
+								'bSortable' : false,
+								'sClass' : 'center'
+							}]
 
 				});
 			} else {
