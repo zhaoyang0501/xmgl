@@ -73,44 +73,5 @@
 		</div>
 		<%@ include file="../foot.jsp"%>
 	</div>
-
-	<!-- 编辑新增弹出框 -->
-	<div class="modal hide fade" id="_modal">
-		<div class="modal-header blue">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<label id="_modal_header_label"></label>
-		</div>
-		<div class="modal-body" style="min-height: 400px;">
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="form-container grid-form form-background left-align form-horizontal">
-						<form action="" method="get" id=''>
-							<input type="hidden" id="id" value="">
-							
-							<div class="control-group">
-								<label for="title" class="control-label">公告标题：</label>
-								<div class="controls">
-									<input type="text" id="title" placeholder="">
-								</div>
-							</div>
-							<div class="control-group" id='control_projectStep'>
-								<label for="context" class="control-label">公告内容：</label>
-								<div class="controls">
-									<textarea id='context' name=context rows="20" cols="">
-									
-									</textarea>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal-footer center" id="div_footer">
-			<a class="btn btn-primary" onclick="$.adminNotice.save()">保存</a>
-			<a href="#" class="btn" data-dismiss="modal" id="closeViewModal">关闭</a>
-		</div>
-	</div>
 </body>
 </html>
